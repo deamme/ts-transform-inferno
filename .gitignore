@@ -1,0 +1,5 @@
+dist
+node_modules
+test/temp
+example/node_modules
+example/dist

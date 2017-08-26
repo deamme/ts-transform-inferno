@@ -1,0 +1,19 @@
+{
+  "name": "ts-transform-inferno-example",
+  "version": "1.0.0",
+  "description": "Example of use of ts-transform-inferno with webpack",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "Deam Hansen",
+  "license": "MIT",
+  "dependencies": {
+    "inferno": "^3.8.0",
+    "inferno-component": "^3.8.0",
+    "ts-loader": "^2.3.4",
+    "ts-transform-inferno": "^0.0.10",
+    "typescript": "^2.4.2",
+    "webpack": "^3.5.5"
+  }
+}
