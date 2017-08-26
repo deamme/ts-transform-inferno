@@ -1,5 +1,9 @@
-var path = require("path");
-var transformer = require("ts-transform-inferno").default;
+const webpack = require('webpack');
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const path = require("path");
+const transformer = require("ts-transform-inferno").default;
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -8,7 +12,7 @@ module.exports = {
     filename: "bundle.js"
   },
   resolve: {
-    extensions: [".ts", ".tsx"]
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
   },
   module: {
     rules: [
@@ -26,5 +30,24 @@ module.exports = {
         loader: "ts-loader"
       }
     ]
-  }
+  },
+  devServer: {
+    contentBase: "src/",
+    historyApiFallback: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      inject: "body"
+    }),
+    new CleanWebpackPlugin(["dist"], {
+      verbose: true
+    }),
+    // By default, webpack does `n=>n` compilation with entry files. This concatenates
+    // them into a single chunk.
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
