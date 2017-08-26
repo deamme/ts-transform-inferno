@@ -1,5 +1,6 @@
 # ts-transform-inferno
 [![travis](https://travis-ci.org/deamme/ts-transform-inferno.svg?branch=master)](https://travis-ci.org/deamme/ts-transform-inferno)
+[![npm version](https://badge.fury.io/js/ts-transform-inferno.svg)](https://badge.fury.io/js/ts-transform-inferno)
 
 Typescript transformer for [InfernoJS](https://github.com/infernojs/inferno).
 
