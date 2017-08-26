@@ -9,7 +9,6 @@ import getValue from "./utils/getValue";
 import svgAttributes from "./utils/svgAttributes";
 import isNodeNull from "./utils/isNodeNull";
 import handleWhiteSpace from "./utils/handleWhiteSpace";
-import createVNodeVariableAssignment from "./utils/createVNodeVariableAssignment";
 let NULL;
 
 export default function() {
@@ -17,14 +16,40 @@ export default function() {
     return transformSourceFile;
 
     function transformSourceFile(node: ts.SourceFile) {
+      let isInferno = false;
+      node.statements.forEach(node => {
+        if (node.kind === ts.SyntaxKind.ImportDeclaration) {
+          if ((node as any).moduleSpecifier.text === "inferno") {
+            isInferno = true;
+          }
+        }
+      });
+
+      if (!isInferno) {
+        node.statements.unshift(
+          ts.createImportDeclaration(
+            undefined,
+            undefined,
+            ts.createImportClause(
+              undefined,
+              ts.createNamedImports([
+                ts.createImportSpecifier(
+                  undefined,
+                  ts.createIdentifier("createVNode")
+                )
+              ])
+            ),
+            ts.createLiteral("inferno")
+          )
+        );
+      }
+
       if (node.isDeclarationFile) {
         return node;
       }
 
-      createVNodeVariableAssignment(context);
-
       const visited = ts.visitEachChild(node, visitor, context);
-      ts.addEmitHelpers(visited, context.readEmitHelpers());
+      // ts.addEmitHelpers(visited, context.readEmitHelpers());
       return visited;
     }
 
@@ -52,6 +77,38 @@ export default function() {
             return ts.visitNode((<ts.JsxExpression>node).expression, visitor);
           }
           break;
+
+        case ts.SyntaxKind.ImportDeclaration:
+          if ((node as any).moduleSpecifier.text === "inferno") {
+            if ((node as any).importClause.namedBindings) {
+              let isCreateVNode = false;
+              (node as any).importClause.namedBindings.elements.forEach(
+                node => {
+                  if (node.name.text === "createVNode") {
+                    isCreateVNode = true;
+                  }
+                }
+              );
+
+              if (!isCreateVNode) {
+                (node as any).importClause.namedBindings.elements.push(
+                  ts.createImportSpecifier(
+                    undefined,
+                    ts.createIdentifier("createVNode")
+                  )
+                );
+              }
+            } else {
+              (node as any).importClause.namedBindings = ts.createNamedImports([
+                ts.createImportSpecifier(
+                  undefined,
+                  ts.createIdentifier("createVNode")
+                )
+              ]);
+            }
+          }
+
+          return node;
 
         default:
           return ts.visitEachChild(node, visitor, context);
@@ -290,7 +347,7 @@ export default function() {
         if (!isNullOrUndefined(vNode)) {
           children.push(vNode);
 
-           /*
+          /*
             * Loop direct children to check if they have key property set
             * If they do, flag parent as hasKeyedChildren to increase runtime performance of Inferno
             * When key already found within one of its children, they must all be keyed

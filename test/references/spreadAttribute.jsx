@@ -1,4 +1,3 @@
-var createVNode = Inferno.createVNode;
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -7,4 +6,5 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
+import { createVNode } from "inferno";
 createVNode(2, "div", null, null, __assign({}, props, { "foo": "bar" }));
