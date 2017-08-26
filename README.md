@@ -16,4 +16,4 @@ Look into the `example` folder and its webpack config.
 
 `cd example && npm install`
 
-`npm run build`
+`npm start`
