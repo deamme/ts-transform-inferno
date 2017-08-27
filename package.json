@@ -18,7 +18,7 @@
     "inferno"
   ],
   "scripts": {
-    "test": "rimraf test/temp && ts-node test/index.ts",
+    "test": "rimraf tests/temp && ts-node tests/index.ts",
     "overwrite-references": "ts-node test/overwriteReferences.ts",
     "prepublishOnly": "rimraf dist && tsc"
   },
