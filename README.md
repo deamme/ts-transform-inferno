@@ -25,8 +25,11 @@ You can run the following command to test: `npm test`
 
 ### Adding test cases
 Write your test in a `.tsx` file and add it to `tests/cases`.
+
 Compile with `npm test` and look into the `tests/temp` and verify.
+
 Overwrite references by running the following command: `npm run overwrite-references`
+
 Run `npm test` again to verify that all tests are passing.
 
 ## Credits
