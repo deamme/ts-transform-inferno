@@ -6,5 +6,6 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-import { createVNode } from "inferno";
+var Inferno = require("inferno");
+var createVNode = Inferno.createVNode;
 createVNode(2, "div", null, null, __assign({}, props, { "foo": "bar" }));

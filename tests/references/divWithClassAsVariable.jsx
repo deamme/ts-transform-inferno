@@ -1,2 +1,3 @@
-import { createVNode } from "inferno";
+var Inferno = require("inferno");
+var createVNode = Inferno.createVNode;
 createVNode(2, "div", variable, "1");

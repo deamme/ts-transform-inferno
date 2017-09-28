@@ -1,5 +1,6 @@
 dist
 node_modules
-test/temp
+tests/temp
 example/node_modules
 example/dist
+**/package-lock.json

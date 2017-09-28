@@ -11,45 +11,46 @@ import isNodeNull from "./utils/isNodeNull";
 import handleWhiteSpace from "./utils/handleWhiteSpace";
 let NULL;
 
-export default function() {
+export default function () {
   return (context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
     return transformSourceFile;
 
     function transformSourceFile(node: ts.SourceFile) {
-      let isInferno = false;
-      node.statements.forEach(node => {
-        if (node.kind === ts.SyntaxKind.ImportDeclaration) {
-          if ((node as any).moduleSpecifier.text === "inferno") {
-            isInferno = true;
-          }
-        }
-      });
-
-      if (!isInferno) {
-        node.statements.unshift(
-          ts.createImportDeclaration(
-            undefined,
-            undefined,
-            ts.createImportClause(
-              undefined,
-              ts.createNamedImports([
-                ts.createImportSpecifier(
-                  undefined,
-                  ts.createIdentifier("createVNode")
-                )
-              ])
-            ),
-            ts.createLiteral("inferno")
+      const test = ts.createVariableStatement(
+        undefined,
+        [ts.createVariableDeclaration(
+          'createVNode',
+          undefined,
+          ts.createPropertyAccess(
+            ts.createIdentifier('Inferno'),
+            ts.createIdentifier('createVNode')
           )
-        );
-      }
+        )]
+      )
+      node = ts.updateSourceFileNode(
+        node,
+        [ts.createVariableStatement(
+          undefined,
+          [ts.createVariableDeclaration(
+            "Inferno",
+            undefined,
+            ts.createCall(
+              ts.createIdentifier("require"),
+              [],
+              [ts.createLiteral("inferno")]
+            )
+          )]
+        ),
+        test,
+        ...node.statements
+        ]
+      );
 
       if (node.isDeclarationFile) {
         return node;
       }
 
       const visited = ts.visitEachChild(node, visitor, context);
-      // ts.addEmitHelpers(visited, context.readEmitHelpers());
       return visited;
     }
 
@@ -77,38 +78,6 @@ export default function() {
             return ts.visitNode((<ts.JsxExpression>node).expression, visitor);
           }
           break;
-
-        case ts.SyntaxKind.ImportDeclaration:
-          if ((node as any).moduleSpecifier.text === "inferno") {
-            if ((node as any).importClause.namedBindings) {
-              let isCreateVNode = false;
-              (node as any).importClause.namedBindings.elements.forEach(
-                node => {
-                  if (node.name.text === "createVNode") {
-                    isCreateVNode = true;
-                  }
-                }
-              );
-
-              if (!isCreateVNode) {
-                (node as any).importClause.namedBindings.elements.push(
-                  ts.createImportSpecifier(
-                    undefined,
-                    ts.createIdentifier("createVNode")
-                  )
-                );
-              }
-            } else {
-              (node as any).importClause.namedBindings = ts.createNamedImports([
-                ts.createImportSpecifier(
-                  undefined,
-                  ts.createIdentifier("createVNode")
-                )
-              ]);
-            }
-          }
-
-          return node;
 
         default:
           return ts.visitEachChild(node, visitor, context);

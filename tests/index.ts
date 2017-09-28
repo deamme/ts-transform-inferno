@@ -8,7 +8,7 @@ import { mkdirpSync } from "fs-extra";
 const config = {
   experimentalDecorators: true,
   jsx: ts.JsxEmit.Preserve,
-  module: ts.ModuleKind.CommonJS,
+  module: ts.ModuleKind.UMD,
   moduleResolution: ts.ModuleResolutionKind.NodeJs,
   noEmitOnError: false,
   noUnusedLocals: true,

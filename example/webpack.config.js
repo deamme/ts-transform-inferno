@@ -3,7 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const path = require("path");
-const transformer = require("ts-transform-inferno").default;
+const transformer = require("../dist/index").default;
 
 module.exports = {
   entry: "./src/index.tsx",
