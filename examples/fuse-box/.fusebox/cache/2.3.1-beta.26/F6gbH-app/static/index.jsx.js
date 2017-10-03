@@ -1,8 +1,0 @@
-module.exports = { contents: "\"use strict\";\nvar __extends = (this && this.__extends) || (function () {\n    var extendStatics = Object.setPrototypeOf ||\n        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n    return function (d, b) {\n        extendStatics(d, b);\n        function __() { this.constructor = d; }\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n    };\n})();\nexports.__esModule = true;\nvar Inferno = require(\"inferno\");\nvar createVNode = Inferno.createVNode;\nvar inferno_1 = require(\"inferno\");\nvar inferno_component_1 = require(\"inferno-component\");\nvar Incrementer_1 = require(\"./components/Incrementer\");\nvar container = document.getElementById(\"app\");\nvar MyComponent = /** @class */ (function (_super) {\n    __extends(MyComponent, _super);\n    function MyComponent(props, context) {\n        var _this = _super.call(this, props, context) || this;\n        _this.tsxVersion = 2.48; /* This is typed value */\n        return _this;\n    }\n    MyComponent.prototype.render = function () {\n        return (createVNode(2, \"div\", null, [createVNode(2, \"h1\", null, \"Welcome to Inferno \" + inferno_1.version + \" TSX \" + this.tsxVersion), createVNode(16, Incrementer_1.Incrementer, null, null, { \"name\": \"Crazy button\" })]));\n    };\n    return MyComponent;\n}(inferno_component_1[\"default\"]));\ninferno_1.render(createVNode(16, MyComponent), container);\n",
-dependencies: ["inferno","inferno","inferno-component","./components/Incrementer"],
-sourceMap: {},
-headerContent: undefined,
-mtime: 1507060742000,
-devLibsRequired : undefined,
-_ : {}
-}
