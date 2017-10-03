@@ -1,6 +1,5 @@
 dist
 node_modules
 tests/temp
-example/node_modules
-example/dist
 **/package-lock.json
+**/.fusebox
