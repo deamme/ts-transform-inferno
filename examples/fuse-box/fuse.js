@@ -3,7 +3,7 @@ const transformInferno = require('ts-transform-inferno').default
 
 const fuse = FuseBox.init({
     homeDir: "src",
-    output: "dist/$name.js",
+    output: "build/$name.js",
     cache: true,
     transformers: {
         before: [transformInferno()]
