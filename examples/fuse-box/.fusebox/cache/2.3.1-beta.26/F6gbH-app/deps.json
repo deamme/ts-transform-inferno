@@ -1,0 +1,83 @@
+{
+  "tree": {
+    "fusebox-hot-reload@0.0.0": {
+      "deps": {
+        "fusebox-websocket@0.0.0": {
+          "deps": {
+            "events@0.0.0": {
+              "deps": {},
+              "name": "events",
+              "version": "0.0.0"
+            }
+          },
+          "name": "fusebox-websocket",
+          "version": "0.0.0"
+        }
+      },
+      "name": "fusebox-hot-reload",
+      "version": "0.0.0"
+    },
+    "inferno@3.9.0": {
+      "deps": {
+        "process@0.0.0": {
+          "deps": {},
+          "name": "process",
+          "version": "0.0.0"
+        }
+      },
+      "name": "inferno",
+      "version": "3.9.0"
+    },
+    "inferno-component@3.9.0": {
+      "deps": {},
+      "name": "inferno-component",
+      "version": "3.9.0"
+    }
+  },
+  "flat": {
+    "fusebox-hot-reload@0.0.0": {
+      "name": "fusebox-hot-reload",
+      "version": "0.0.0",
+      "files": [
+        "index.js"
+      ]
+    },
+    "fusebox-websocket@0.0.0": {
+      "name": "fusebox-websocket",
+      "version": "0.0.0",
+      "files": [
+        "index.js"
+      ]
+    },
+    "events@0.0.0": {
+      "name": "events",
+      "version": "0.0.0",
+      "files": [
+        "index.js"
+      ]
+    },
+    "inferno@3.9.0": {
+      "name": "inferno",
+      "version": "3.9.0",
+      "files": [
+        "index.js",
+        "dist/index.js"
+      ]
+    },
+    "process@0.0.0": {
+      "name": "process",
+      "version": "0.0.0",
+      "files": [
+        "index.js"
+      ]
+    },
+    "inferno-component@3.9.0": {
+      "name": "inferno-component",
+      "version": "3.9.0",
+      "files": [
+        "index.js",
+        "dist/index.js"
+      ]
+    }
+  }
+}

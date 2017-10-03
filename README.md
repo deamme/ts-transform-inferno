@@ -11,12 +11,21 @@ or
 
 `yarn add --dev ts-transform-inferno`
 
-## Usage with webpack and ts-loader
-Look into the `example` folder and its webpack config.
+## Usage with fuse-box
+Look into the `examples/fuse-box` folder and the `fuse.js` file.
 
 You could also try to build the project by running the following commands:
 
-`cd example && npm install`
+`cd examples/fuse-box && npm install`
+
+`npm start`
+
+## Usage with webpack and ts-loader
+Look into the `examples/webpack` folder and its webpack config.
+
+You could also try to build the project by running the following commands:
+
+`cd examples/webpack && npm install`
 
 `npm run build` or `npm start`
 
