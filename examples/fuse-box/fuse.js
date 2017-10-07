@@ -1,20 +1,51 @@
-const { FuseBox } = require('fuse-box');
+const {
+  FuseBox,
+  Sparky,
+  EnvPlugin,
+  CSSPlugin,
+  WebIndexPlugin,
+  QuantumPlugin
+} = require('fuse-box')
 const transformInferno = require('ts-transform-inferno').default
+let fuse, app
+let isProduction = false
 
-const fuse = FuseBox.init({
-    homeDir: "src",
-    output: "build/$name.js",
-    cache: true,
+Sparky.task('config', _ => {
+  fuse = new FuseBox({
+    homeDir: 'src',
+    hash: isProduction,
+    output: 'dist/$name.js',
+    experimentalFeatures: true,
+    cache: !isProduction,
+    sourceMaps: !isProduction,
     transformers: {
-        before: [transformInferno()]
-    }
-});
-
-fuse.dev()
-
-fuse.bundle("app")
-    .instructions(`>index.tsx`)
-    .hmr()
-    .watch()
-
-fuse.run();
+      before: [transformInferno()]
+    },
+    plugins: [
+      EnvPlugin({ NODE_ENV: isProduction ? 'production' : 'development' }),
+      CSSPlugin(),
+      WebIndexPlugin({
+        title: "Inferno Typescript FuseBox Example",
+        template: "src/index.html",
+      }),
+      isProduction &&
+        QuantumPlugin({
+          bakeApiIntoBundle: 'app',
+          treeshake: true,
+          uglify: true,
+        })
+    ]
+  })
+  app = fuse.bundle('app').instructions('>index.tsx')
+})
+Sparky.task('clean', _ => Sparky.src('dist/').clean('dist/'))
+Sparky.task('env', _ => (isProduction = true))
+Sparky.task('dev', ['clean', 'config'], _ => {
+  fuse.dev()
+  app.hmr().watch()
+  return fuse.run()
+})
+Sparky.task('prod', ['clean', 'env', 'config'], _ => {
+  fuse.dev({ reload: true }) // remove after demo
+  return fuse.run()
+})
