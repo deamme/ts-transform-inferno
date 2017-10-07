@@ -4,7 +4,8 @@
   "description": "Example of use of ts-transform-inferno with fuse-box",
   "main": "index.js",
   "scripts": {
-    "start": "node fuse.js"
+    "start:dev": "node fuse dev",
+    "start:prod": "node fuse prod"
   },
   "author": "Deam Hansen",
   "license": "MIT",
