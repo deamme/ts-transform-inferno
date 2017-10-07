@@ -49,4 +49,5 @@ Very much inspired by these projects:
 - [TypeScript](https://github.com/Microsoft/TypeScript)
 
 The `examples/webpack` folder is shamelessly taken from [inferno-typescript-example](https://github.com/infernojs/inferno-typescript-example) with some slight modifications.
+
 The `fuse.js` file from `examples/fuse-box` folder is shamelessly taken from [hyperapp-fusebox](https://github.com/osdevisnot/hyperapp-fusebox) with some slight modifications.
