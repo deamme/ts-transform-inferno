@@ -26,4 +26,4 @@ var __classwrap = function(classes, prefix) {
 }
 var Inferno = require("inferno");
 var createVNode = Inferno.createVNode;
-createVNode(2, "div", __classwrap(variable), "1", { "id": "test", "onClick": func });
+createVNode(2, "div", __classwrap("first" + "second"), "1");

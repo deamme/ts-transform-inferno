@@ -23,7 +23,7 @@ function compile(path: string, callback) {
   const program = ts.createProgram(files, config, compilerHost);
 
   program.emit(undefined, compare, undefined, undefined, {
-    before: [transform()]
+    before: [transform({ classwrap: true })]
   });
 
   callback(files);

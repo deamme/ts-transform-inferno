@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "test": "rimraf tests/temp && ts-node tests/index.ts",
+    "build": "tsc",
     "overwrite-references": "ts-node tests/overwriteReferences.ts",
     "prepublishOnly": "rimraf dist && tsc"
   },

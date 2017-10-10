@@ -3,6 +3,7 @@ import * as ts from "typescript";
 import VNodeFlags from "inferno-vnode-flags";
 import isComponent from "./utils/isComponent";
 import createAssignHelper from "./utils/createAssignHelper";
+import createClasswrapHelper from "./utils/createClasswrapHelper";
 import isNullOrUndefined from "./utils/isNullOrUndefined";
 import getName from "./utils/getName";
 import getValue from "./utils/getValue";
@@ -11,7 +12,11 @@ import isNodeNull from "./utils/isNodeNull";
 import handleWhiteSpace from "./utils/handleWhiteSpace";
 let NULL;
 
-export default function () {
+export interface Config {
+  classwrap: boolean
+}
+
+export default function (CONFIG?: Config) {
   return (context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
     return transformSourceFile;
 
@@ -41,7 +46,7 @@ export default function () {
             )
           )]
         ),
-        test,
+          test,
         ...node.statements
         ]
       );
@@ -366,7 +371,9 @@ export default function () {
       args.push(type);
 
       if (hasClassName) {
-        args.push(className);
+        CONFIG.classwrap && !ts.isStringLiteral(className)
+          ? args.push(createClasswrapHelper(context, [className]))
+          : args.push(className);
       } else if (hasChildren || hasProps || hasKey || hasRef || noNormalize) {
         args.push(ts.createNull());
       }

@@ -4,11 +4,12 @@ const {
   EnvPlugin,
   CSSPlugin,
   WebIndexPlugin,
-  QuantumPlugin
-} = require('fuse-box')
-const transformInferno = require('ts-transform-inferno').default
-let fuse, app
-let isProduction = false
+  QuantumPlugin,
+} = require('fuse-box');
+// const transformInferno = require('../../dist').default
+const transformInferno = require('ts-transform-inferno').default;
+let fuse, app;
+let isProduction = false;
 
 Sparky.task('config', _ => {
   fuse = new FuseBox({
@@ -19,33 +20,33 @@ Sparky.task('config', _ => {
     cache: !isProduction,
     sourceMaps: !isProduction,
     transformers: {
-      before: [transformInferno()]
+      before: [transformInferno({ classwrap: true })],
     },
     plugins: [
       EnvPlugin({ NODE_ENV: isProduction ? 'production' : 'development' }),
       CSSPlugin(),
       WebIndexPlugin({
-        title: "Inferno Typescript FuseBox Example",
-        template: "src/index.html",
+        title: 'Inferno Typescript FuseBox Example',
+        template: 'src/index.html',
       }),
       isProduction &&
-        QuantumPlugin({
-          bakeApiIntoBundle: 'app',
-          treeshake: true,
-          uglify: true,
-        })
-    ]
-  })
-  app = fuse.bundle('app').instructions('>index.tsx')
-})
-Sparky.task('clean', _ => Sparky.src('dist/').clean('dist/'))
-Sparky.task('env', _ => (isProduction = true))
+      QuantumPlugin({
+        bakeApiIntoBundle: 'app',
+        treeshake: true,
+        uglify: true,
+      }),
+    ],
+  });
+  app = fuse.bundle('app').instructions('>index.tsx');
+});
+Sparky.task('clean', _ => Sparky.src('dist/').clean('dist/'));
+Sparky.task('env', _ => (isProduction = true));
 Sparky.task('dev', ['clean', 'config'], _ => {
-  fuse.dev()
-  app.hmr().watch()
-  return fuse.run()
-})
+  fuse.dev();
+  app.hmr().watch();
+  return fuse.run();
+});
 Sparky.task('prod', ['clean', 'env', 'config'], _ => {
-  fuse.dev({ reload: true }) // remove after demo
-  return fuse.run()
-})
+  fuse.dev({ reload: true }); // remove after demo
+  return fuse.run();
+});
