@@ -11,7 +11,17 @@ or
 
 `yarn add --dev ts-transform-inferno`
 
-## Usage with FuseBox
+## General usage
+```javascript
+const transformInferno = require('ts-transform-inferno').default;
+
+transformInferno({
+  classwrap: true // or false
+})
+```
+Checkout [Classwrap](https://github.com/JorgeBucaran/classwrap).
+
+## Usage with FuseBox (recommended)
 Look into the `examples/fuse-box` folder and the `fuse.js` file.
 
 You could also try to build the project by running the following commands:
@@ -43,11 +53,10 @@ Run `npm test` again to verify that all tests are passing.
 
 ## Credits
 Very much inspired by these projects:
+- [inferno-typescript-example](https://github.com/infernojs/inferno-typescript-example)
 - [ts-transform-css-modules](https://github.com/longlho/ts-transform-css-modules)
 - [ts-transform-react-intl](https://github.com/longlho/ts-transform-react-intl)
 - [babel-plugin-inferno](https://github.com/infernojs/babel-plugin-inferno)
 - [TypeScript](https://github.com/Microsoft/TypeScript)
-
-The `examples/webpack` folder is shamelessly taken from [inferno-typescript-example](https://github.com/infernojs/inferno-typescript-example) with some slight modifications.
-
-The `fuse.js` file from `examples/fuse-box` folder is shamelessly taken from [hyperapp-fusebox](https://github.com/osdevisnot/hyperapp-fusebox) with some slight modifications.
+- [hyperapp-fusebox](https://github.com/osdevisnot/hyperapp-fusebox)
+- [Classwrap](https://github.com/JorgeBucaran/classwrap)
