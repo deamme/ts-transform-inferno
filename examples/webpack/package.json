@@ -18,7 +18,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "html-webpack-plugin": "^2.30.1",
     "ts-loader": "^2.3.7",
-    "ts-transform-inferno": "^0.5.0",
+    "ts-transform-inferno": "^0.6.0",
     "typescript": "^2.5.3",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"

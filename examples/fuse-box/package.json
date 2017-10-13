@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "fuse-box": "^2.3.3",
-    "ts-transform-inferno": "^0.5.0",
+    "ts-transform-inferno": "^0.6.0",
     "uglify-js": "^3.1.3"
   }
 }

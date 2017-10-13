@@ -17,6 +17,10 @@ export interface Config {
 }
 
 export default function (CONFIG?: Config) {
+  CONFIG = CONFIG ? CONFIG : {
+    classwrap: false
+  };
+
   return (context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
     return transformSourceFile;
 
@@ -366,7 +370,7 @@ export default function (CONFIG?: Config) {
       args.push(type);
 
       if (hasClassName) {
-        CONFIG.classwrap && !ts.isStringLiteral(className)
+       CONFIG.classwrap && !ts.isStringLiteral(className)
           ? args.push(createClasswrapHelper(context, [className]))
           : args.push(className);
       } else if (hasChildren || hasProps || hasKey || hasRef || noNormalize) {

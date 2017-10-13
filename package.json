@@ -1,6 +1,6 @@
 {
   "name": "ts-transform-inferno",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A typescript transformer for InfernoJS",
   "bugs": {
     "url": "https://github.com/deamme/ts-transform-inferno/issues"
