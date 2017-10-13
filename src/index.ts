@@ -230,22 +230,16 @@ export default function (CONFIG?: Config) {
         } else {
           let propName = astProp.name.text;
 
-          // if (propName.type === 'JSXIdentifier') {
-          // 	propName = propName.name;
-          // } else if (propName.type === 'JSXNamespacedName') {
-          // 	propName = propName.namespace.name + ':' + propName.name.name;
-          // }
-
           if (
             !isComponent &&
             (propName === "className" || propName === "class")
           ) {
-            className = getValue(initializer);
+            className = getValue(initializer, visitor);
           } else if (!isComponent && propName === "htmlFor") {
             props.push(
               ts.createPropertyAssignment(
                 getName("for"),
-                getValue(initializer)
+                getValue(initializer, visitor)
               )
             );
           } else if (propName.substr(0, 11) === "onComponent" && isComponent) {
@@ -257,7 +251,7 @@ export default function (CONFIG?: Config) {
             ref.properties.push(
               ts.createObjectLiteral(
                 getName(propName),
-                getValue(initializer)
+                getValue(initializer, visitor)
               )
             );
           } else if (!isComponent && propName in svgAttributes) {
@@ -265,7 +259,7 @@ export default function (CONFIG?: Config) {
             props.push(
               ts.createPropertyAssignment(
                 getName(svgAttributes[propName]),
-                getValue(initializer)
+                getValue(initializer, visitor)
               )
             );
           } else {
@@ -280,16 +274,16 @@ export default function (CONFIG?: Config) {
                 hasKeyedChildren = true;
                 break;
               case "ref":
-                ref = getValue(initializer);
+                ref = getValue(initializer, visitor);
                 break;
               case "key":
-                key = getValue(initializer);
+                key = getValue(initializer, visitor);
                 break;
               default:
                 props.push(
                   ts.createPropertyAssignment(
                     getName(propName),
-                    initializer ? getValue(initializer) : ts.createTrue()
+                    initializer ? getValue(initializer, visitor) : ts.createTrue()
                   )
                 );
             }
