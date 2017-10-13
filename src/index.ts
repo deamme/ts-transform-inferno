@@ -220,6 +220,7 @@ export default function (CONFIG?: Config) {
       let assignArgs = [];
       for (let i = 0; i < astProps.length; i++) {
         let astProp = astProps[i];
+        const initializer = astProp.initializer
 
         if (astProp.kind === ts.SyntaxKind.JsxSpreadAttribute) {
           assignArgs = [
@@ -239,12 +240,12 @@ export default function (CONFIG?: Config) {
             !isComponent &&
             (propName === "className" || propName === "class")
           ) {
-            className = getValue(astProp.initializer);
+            className = getValue(initializer);
           } else if (!isComponent && propName === "htmlFor") {
             props.push(
               ts.createPropertyAssignment(
                 getName("for"),
-                getValue(astProp.initializer)
+                getValue(initializer)
               )
             );
           } else if (propName.substr(0, 11) === "onComponent" && isComponent) {
@@ -256,7 +257,7 @@ export default function (CONFIG?: Config) {
             ref.properties.push(
               ts.createObjectLiteral(
                 getName(propName),
-                getValue(astProp.initializer)
+                getValue(initializer)
               )
             );
           } else if (!isComponent && propName in svgAttributes) {
@@ -264,7 +265,7 @@ export default function (CONFIG?: Config) {
             props.push(
               ts.createPropertyAssignment(
                 getName(svgAttributes[propName]),
-                getValue(astProp.initializer)
+                getValue(initializer)
               )
             );
           } else {
@@ -279,16 +280,16 @@ export default function (CONFIG?: Config) {
                 hasKeyedChildren = true;
                 break;
               case "ref":
-                ref = getValue(astProp.initializer);
+                ref = getValue(initializer);
                 break;
               case "key":
-                key = getValue(astProp.initializer);
+                key = getValue(initializer);
                 break;
               default:
                 props.push(
                   ts.createPropertyAssignment(
                     getName(propName),
-                    getValue(astProp.initializer)
+                    initializer ? getValue(initializer) : ts.createTrue()
                   )
                 );
             }
