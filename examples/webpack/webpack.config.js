@@ -3,7 +3,8 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const path = require("path");
-const tranformInferno = require("ts-transform-inferno").default;
+const transformInferno = require("ts-transform-inferno").default;
+// const transformInferno = require('../../dist').default
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -21,7 +22,7 @@ module.exports = {
         loader: "ts-loader",
         options: {
           getCustomTransformers: () => ({
-            before: [tranformInferno({ classwrap: true })]
+            before: [transformInferno({ classwrap: true })]
           })
         }
       },

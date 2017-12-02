@@ -1,0 +1,1 @@
+<FunctionalComponent onComponentDidMount={ mounted } />

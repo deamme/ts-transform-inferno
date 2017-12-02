@@ -59,5 +59,6 @@ function printFinalResult(files: string[]) {
     console.log(`All cases (${files.length}) successfully passed`);
   }
 }
-
+console.time('compile time')
 compile(resolve(__dirname, "cases/*.tsx"), printFinalResult);
+console.timeEnd('compile time')

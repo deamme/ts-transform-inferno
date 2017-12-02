@@ -10,57 +10,23 @@ import getValue from "./utils/getValue";
 import svgAttributes from "./utils/svgAttributes";
 import isNodeNull from "./utils/isNodeNull";
 import handleWhiteSpace from "./utils/handleWhiteSpace";
+import updateSourceFile from "./updateSourceFile"
 let NULL;
 
 export interface Config {
   classwrap: boolean
 }
 
-export default function (CONFIG?: Config) {
-  CONFIG = CONFIG ? CONFIG : {
-    classwrap: false
-  };
+export default (CONFIG?: Config) => {
+  const { classwrap } = CONFIG;
 
   return (context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
-    return transformSourceFile;
-
-    function transformSourceFile(node: ts.SourceFile) {
-      const test = ts.createVariableStatement(
-        undefined,
-        [ts.createVariableDeclaration(
-          'createVNode',
-          undefined,
-          ts.createPropertyAccess(
-            ts.createIdentifier('Inferno'),
-            ts.createIdentifier('createVNode')
-          )
-        )]
-      )
-      node = ts.updateSourceFileNode(
-        node,
-        [ts.createVariableStatement(
-          undefined,
-          [ts.createVariableDeclaration(
-            "Inferno",
-            undefined,
-            ts.createCall(
-              ts.createIdentifier("require"),
-              [],
-              [ts.createLiteral("inferno")]
-            )
-          )]
-        ),
-          test,
-        ...node.statements
-        ]
-      );
-
-      if (node.isDeclarationFile) {
-        return node;
+    return (sourceFile: ts.SourceFile) => {
+      if (sourceFile.isDeclarationFile) {
+        return sourceFile;
       }
 
-      const visited = ts.visitEachChild(node, visitor, context);
-      return visited;
+      return ts.visitEachChild(updateSourceFile(sourceFile), visitor, context);
     }
 
     function visitor(node: ts.Node): ts.VisitResult<ts.Node> {
@@ -70,24 +36,24 @@ export default function (CONFIG?: Config) {
             <ts.JsxElement>node,
             (<ts.JsxElement>node).children
           );
-
+    
         case ts.SyntaxKind.JsxSelfClosingElement:
           return createVNode(<ts.JsxSelfClosingElement>node);
-
+    
         case ts.SyntaxKind.JsxText:
           var text = handleWhiteSpace(node.getText());
-
+    
           if (text !== "") {
             return ts.createLiteral(text);
           }
           break;
-
+    
         case ts.SyntaxKind.JsxExpression:
           if ((<ts.JsxExpression>node).expression) {
             return ts.visitNode((<ts.JsxExpression>node).expression, visitor);
           }
           break;
-
+    
         default:
           return ts.visitEachChild(node, visitor, context);
       }
@@ -247,13 +213,12 @@ export default function (CONFIG?: Config) {
               )
             );
           } else if (propName.substr(0, 11) === "onComponent" && isComponent) {
-            // fix
             if (!ref) {
               ref = ts.createObjectLiteral([]);
             }
 
             ref.properties.push(
-              ts.createObjectLiteral(
+              ts.createPropertyAssignment(
                 getName(propName),
                 getValue(initializer, visitor)
               )
@@ -370,7 +335,7 @@ export default function (CONFIG?: Config) {
       args.push(type);
 
       if (hasClassName) {
-       CONFIG.classwrap && !ts.isStringLiteral(className)
+       classwrap && !ts.isStringLiteral(className)
           ? args.push(createClasswrapHelper(context, [className]))
           : args.push(className);
       } else if (hasChildren || hasProps || hasKey || hasRef || noNormalize) {
