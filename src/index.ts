@@ -3,7 +3,7 @@ import * as ts from "typescript";
 import VNodeFlags from "inferno-vnode-flags";
 import isComponent from "./utils/isComponent";
 import createAssignHelper from "./utils/createAssignHelper";
-import createClasswrapHelper from "./utils/createClasswrapHelper";
+// import createClasswrapHelper from "./utils/createClasswrapHelper";
 import isNullOrUndefined from "./utils/isNullOrUndefined";
 import getName from "./utils/getName";
 import getValue from "./utils/getValue";
@@ -13,13 +13,7 @@ import handleWhiteSpace from "./utils/handleWhiteSpace";
 import updateSourceFile from "./updateSourceFile"
 let NULL;
 
-export interface Config {
-  classwrap: boolean
-}
-
-export default (CONFIG?: Config) => {
-  const { classwrap } = CONFIG;
-
+export default () => {
   return (context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
     return (sourceFile: ts.SourceFile) => {
       if (sourceFile.isDeclarationFile) {
@@ -335,9 +329,7 @@ export default (CONFIG?: Config) => {
       args.push(type);
 
       if (hasClassName) {
-       classwrap && !ts.isStringLiteral(className)
-          ? args.push(createClasswrapHelper(context, [className]))
-          : args.push(className);
+        args.push(className);
       } else if (hasChildren || hasProps || hasKey || hasRef || noNormalize) {
         args.push(ts.createNull());
       }

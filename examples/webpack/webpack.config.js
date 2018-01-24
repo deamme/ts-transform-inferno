@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const transformInferno = require("ts-transform-inferno").default;
 // const transformInferno = require('../../dist').default
+const transformClasscat = require('ts-transform-classcat').default;
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -13,6 +14,7 @@ module.exports = {
     filename: "bundle.js"
   },
   resolve: {
+    mainFields: ['main'], // Important so Webpack resolves the main field of package.json for Classcat
     extensions: [".js", ".jsx", ".ts", ".tsx"]
   },
   module: {
@@ -22,7 +24,7 @@ module.exports = {
         loader: "ts-loader",
         options: {
           getCustomTransformers: () => ({
-            before: [transformInferno({ classwrap: true })]
+            before: [transformClasscat(), transformInferno()]
           })
         }
       },

@@ -5,21 +5,20 @@
 Typescript transformer for [InfernoJS](https://github.com/infernojs/inferno).
 
 # Install
-`npm install -D ts-transform-inferno`
-
-or
-
-`yarn add --dev ts-transform-inferno`
+`yarn add -D ts-transform-inferno`
 
 ## General usage
 ```javascript
 const transformInferno = require('ts-transform-inferno').default;
 
-transformInferno({
-  classwrap: true // or false
-})
+transformInferno()
 ```
-Checkout [Classwrap](https://github.com/JorgeBucaran/classwrap).
+
+### Usage with css-modules-next
+Coming soon..
+
+### Usage with classcat
+The examples are already using this. It's a custom transformer than comes before ts-transform-inferno. More about it [here](https://github.com/deamme/ts-transform-classcat).
 
 ## Usage with FuseBox (recommended)
 Look into the `examples/fuse-box` folder and the `fuse.js` file.
@@ -59,4 +58,3 @@ Very much inspired by these projects:
 - [babel-plugin-inferno](https://github.com/infernojs/babel-plugin-inferno)
 - [TypeScript](https://github.com/Microsoft/TypeScript)
 - [hyperapp-fusebox](https://github.com/osdevisnot/hyperapp-fusebox)
-- [Classwrap](https://github.com/JorgeBucaran/classwrap)

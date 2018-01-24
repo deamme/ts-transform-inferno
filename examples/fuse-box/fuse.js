@@ -8,6 +8,7 @@ const {
 } = require('fuse-box');
 // const transformInferno = require('../../dist').default
 const transformInferno = require('ts-transform-inferno').default;
+const transformClasscat = require('ts-transform-classcat').default;
 let fuse, app;
 let isProduction = false;
 
@@ -20,7 +21,7 @@ Sparky.task('config', _ => {
     cache: !isProduction,
     sourceMaps: !isProduction,
     transformers: {
-      before: [transformInferno({ classwrap: true })],
+      before: [transformClasscat(), transformInferno()],
     },
     plugins: [
       EnvPlugin({ NODE_ENV: isProduction ? 'production' : 'development' }),

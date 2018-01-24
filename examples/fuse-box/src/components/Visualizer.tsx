@@ -4,7 +4,7 @@
  */
 export function Visualizer({ number: number }) {
   return (
-    <div className={{ visualizer: true }}>
+    <div className={{visualizer: true, test: true}}>
       {number}
     </div>
   );
