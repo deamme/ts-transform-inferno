@@ -15,7 +15,7 @@ transformInferno()
 ```
 
 ### Usage with css-modules-next
-Coming soon..
+Check out the examples folder [here](https://github.com/deamme/ts-transform-css-modules-next).
 
 ### Usage with classcat
 The examples are already using this. It's a custom transformer than comes before ts-transform-inferno. More about it [here](https://github.com/deamme/ts-transform-classcat).
