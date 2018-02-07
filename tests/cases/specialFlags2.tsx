@@ -1,0 +1,1 @@
+<div $HasVNodeChildren>{magic}</div>

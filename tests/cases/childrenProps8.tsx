@@ -1,0 +1,1 @@
+<Com children={<div>1</div>}/>

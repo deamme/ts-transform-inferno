@@ -1,0 +1,1 @@
+<foo children={<span>b</span>}></foo>
