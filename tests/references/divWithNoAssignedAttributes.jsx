@@ -1,3 +1,3 @@
 var Inferno = require("inferno");
 var createVNode = Inferno.createVNode;
-createVNode(2, "div", null, null, { "foo": true, "Bar": true, "STAR": true });
+createVNode(1, "div", null, null, 1, { "foo": true, "Bar": true, "STAR": true });
