@@ -1,0 +1,1 @@
+<div $HasVNodeChildren>text</div>

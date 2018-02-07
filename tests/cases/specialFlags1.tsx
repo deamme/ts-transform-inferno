@@ -1,0 +1,1 @@
+<div $HasKeyedChildren>{magic}</div>

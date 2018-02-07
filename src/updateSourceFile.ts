@@ -1,30 +1,47 @@
-import * as ts from 'typescript'
+import * as ts from "typescript";
 
-export default (sourceFile: ts.SourceFile) => {
-  const createVNodeVariableStatement = ts.createVariableStatement(undefined, [
+function createVarStatement(name: string) {
+  return ts.createVariableStatement(undefined, [
     ts.createVariableDeclaration(
-      'createVNode',
+      name,
       undefined,
       ts.createPropertyAccess(
-        ts.createIdentifier('Inferno'),
-        ts.createIdentifier('createVNode'),
-      ),
-    ),
-  ])
-  
-  return ts.updateSourceFileNode(sourceFile, [
+        ts.createIdentifier("Inferno"),
+        ts.createIdentifier(name)
+      )
+    )
+  ]);
+}
+
+export default (sourceFile: ts.SourceFile, context) => {
+  let statements = [...sourceFile.statements];
+
+  if (context["createVNode"]) {
+    statements.unshift(createVarStatement("createVNode"));
+  }
+  if (context["createComponentVNode"]) {
+    statements.unshift(createVarStatement("createComponentVNode"));
+  }
+  if (context["createTextVNode"]) {
+    statements.unshift(createVarStatement("createTextVNode"));
+  }
+  if (context["normalizeProps"]) {
+    statements.unshift(createVarStatement("normalizeProps"));
+  }
+
+  statements.unshift(
     ts.createVariableStatement(undefined, [
       ts.createVariableDeclaration(
-        'Inferno',
+        "Inferno",
         undefined,
         ts.createCall(
-          ts.createIdentifier('require'),
+          ts.createIdentifier("require"),
           [],
-          [ts.createLiteral('inferno')],
-        ),
-      ),
-    ]),
-    createVNodeVariableStatement,
-    ...sourceFile.statements,
-  ])
-}
+          [ts.createLiteral("inferno")]
+        )
+      )
+    ])
+  );
+
+  return ts.updateSourceFileNode(sourceFile, statements);
+};
