@@ -1,3 +1,3 @@
 var Inferno = require("inferno");
 var createVNode = Inferno.createVNode;
-createVNode(128, "svg", null, createVNode(2, "rect", null, null, { "fill-opacity": "1" }));
+createVNode(32, "svg", null, createVNode(1, "rect", null, null, 1, { "fill-opacity": "1" }), 2);

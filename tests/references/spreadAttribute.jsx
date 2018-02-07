@@ -8,4 +8,4 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 var Inferno = require("inferno");
 var createVNode = Inferno.createVNode;
-createVNode(2, "div", null, null, __assign({}, props, { "foo": "bar" }));
+createVNode(1, "div", null, null, 1, __assign({}, props, { "foo": "bar" }));
