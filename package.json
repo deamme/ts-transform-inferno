@@ -26,7 +26,7 @@
   "author": "Deam Hansen",
   "license": "MIT",
   "dependencies": {
-    "typescript": "^2.6.2"
+    "typescript": "^2.7.1"
   },
   "devDependencies": {
     "@types/node": "^8.0.53",
