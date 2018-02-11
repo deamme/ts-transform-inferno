@@ -113,7 +113,6 @@ export default () => {
           ) {
             // Remove children from props, if it exists
             for (i = 0; i < props.properties.length; i++) {
-              // console.log(props.properties[i])
               if (
                 props.properties[i] &&
                 props.properties[i].name.text === "children"
@@ -128,6 +127,8 @@ export default () => {
             props.properties.push(
               ts.createPropertyAssignment(getName("children"), vChildren)
             );
+            
+            vProps.props[0] = props
           }
           vChildren = NULL;
         }
