@@ -26,7 +26,7 @@ var __extends = (this && this.__extends) || (function () {
     var inferno_component_1 = require("inferno-component");
     var Incrementer_1 = require("./components/Incrementer");
     var container = document.getElementById("app");
-    var MyComponent = (function (_super) {
+    var MyComponent = /** @class */ (function (_super) {
         __extends(MyComponent, _super);
         function MyComponent(props, context) {
             var _this = _super.call(this, props, context) || this;
