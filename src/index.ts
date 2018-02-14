@@ -307,9 +307,9 @@ export default () => {
       let nodeKind = type.kind;
       let component = false;
       let flags;
-
-      if (nodeKind === ts.SyntaxKind.Identifier) {
-        if (isComponent(type.text)) {
+      
+      if (nodeKind === ts.SyntaxKind.Identifier || nodeKind === ts.SyntaxKind.PropertyAccessExpression) {
+        if (isComponent(type.text || type.expression.text)) {
           component = true;
           flags = VNodeFlags.ComponentUnknown;
         } else {
