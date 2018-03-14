@@ -363,7 +363,7 @@ export default () => {
         if (astProp.kind === ts.SyntaxKind.JsxSpreadAttribute) {
           assignArgs = [
             ts.createObjectLiteral(),
-            ts.createIdentifier(astProp.expression.text)
+            astProp.expression
           ];
         } else {
           let propName = astProp.name.text;
