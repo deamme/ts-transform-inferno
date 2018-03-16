@@ -277,7 +277,7 @@ export default () => {
       // NormalizeProps will normalizeChildren too
       if (vProps.needsNormalization) {
         context["normalizeProps"] = true;
-        vChildren = ts.createCall(
+        createVNodeCall = ts.createCall(
           ts.createIdentifier("normalizeProps"),
           [],
           [createVNodeCall]
@@ -361,6 +361,7 @@ export default () => {
         const initializer = astProp.initializer;
 
         if (astProp.kind === ts.SyntaxKind.JsxSpreadAttribute) {
+          needsNormalization = true;
           assignArgs = [
             ts.createObjectLiteral(),
             astProp.expression
