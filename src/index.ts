@@ -48,7 +48,7 @@ export default () => {
           return createVNode(<ts.JsxSelfClosingElement>node);
 
         case ts.SyntaxKind.JsxText:
-          var text = handleWhiteSpace(node.getText());
+          var text = handleWhiteSpace(node.getFullText());
 
           if (text !== "") {
             return ts.createLiteral(text);
