@@ -1,4 +1,4 @@
-var Inferno = require("inferno");
+import * as Inferno from "inferno";
 var createTextVNode = Inferno.createTextVNode;
 var createComponentVNode = Inferno.createComponentVNode;
 var createVNode = Inferno.createVNode;

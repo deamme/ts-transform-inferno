@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "inferno", "inferno-component", "./components/Incrementer"], factory);
+        define(["require", "exports", "inferno", "inferno", "inferno-component", "./components/Incrementer"], factory);
     }
 })(function (require, exports) {
     "use strict";
