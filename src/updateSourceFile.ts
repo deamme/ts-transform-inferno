@@ -30,17 +30,15 @@ export default (sourceFile: ts.SourceFile, context) => {
   }
 
   statements.unshift(
-    ts.createVariableStatement(undefined, [
-      ts.createVariableDeclaration(
-        "Inferno",
+    ts.createImportDeclaration(
+      undefined,
+      undefined,
+      ts.createImportClause(
         undefined,
-        ts.createCall(
-          ts.createIdentifier("require"),
-          [],
-          [ts.createLiteral("inferno")]
-        )
-      )
-    ])
+        ts.createNamespaceImport(ts.createIdentifier("Inferno"))
+      ),
+      ts.createLiteral("inferno")
+    )
   );
 
   return ts.updateSourceFileNode(sourceFile, statements);
