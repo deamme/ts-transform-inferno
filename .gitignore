@@ -4,3 +4,4 @@ tests/temp
 **/package-lock.json
 **/yarn.lock
 **/.fusebox
+**/.rpt2_cache

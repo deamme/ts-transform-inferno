@@ -1,0 +1,27 @@
+{
+  "name": "ts-transform-inferno-example",
+  "version": "1.0.0",
+  "description": "Example of use of ts-transform-inferno with rollup",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "rimraf dist && cross-env NODE_ENV=development rollup -w -c",
+    "build": "rimraf dist && cross-env NODE_ENV=production rollup -c"
+  },
+  "dependencies": {
+    "inferno": "^5.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.63.4",
+    "rollup-plugin-commonjs": "^9.1.4",
+    "rollup-plugin-livereload": "^0.6.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-serve": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-uglify": "^4.0.0",
+    "ts-transform-inferno": "^3.0.0"
+  }
+}
