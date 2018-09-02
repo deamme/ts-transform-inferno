@@ -5,7 +5,7 @@
 Typescript transformer for [InfernoJS](https://github.com/infernojs/inferno).
 
 # Install
-`yarn add -D ts-transform-inferno`
+`yarn add -D ts-transform-inferno typescript`
 
 ## General usage
 ```javascript
