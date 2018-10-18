@@ -304,34 +304,35 @@ export default () => {
     }
 
     function getVNodeType(type) {
-      let nodeKind = type.kind;
       let component = false;
       let flags;
       
-      if (nodeKind === ts.SyntaxKind.Identifier || nodeKind === ts.SyntaxKind.PropertyAccessExpression) {
-        if (isComponent(type.text || type.expression.text)) {
-          component = true;
-          flags = VNodeFlags.ComponentUnknown;
-        } else {
-          let tag = type.text;
+      const text = type.getText();
+      const textSplitted = text.split('.');
+      const length = textSplitted.length;
 
-          type = ts.createLiteral(tag);
-          switch (tag) {
-            case "svg":
-              flags = VNodeFlags.SvgElement;
-              break;
-            case "input":
-              flags = VNodeFlags.InputElement;
-              break;
-            case "textarea":
-              flags = VNodeFlags.TextareaElement;
-              break;
-            case "select":
-              flags = VNodeFlags.SelectElement;
-              break;
-            default:
-              flags = VNodeFlags.HtmlElement;
-          }
+      if (isComponent(textSplitted[length - 1])) {
+        component = true;
+        flags = VNodeFlags.ComponentUnknown;
+      } else {
+        let tag = type.text;
+
+        type = ts.createLiteral(tag);
+        switch (tag) {
+          case "svg":
+            flags = VNodeFlags.SvgElement;
+            break;
+          case "input":
+            flags = VNodeFlags.InputElement;
+            break;
+          case "textarea":
+            flags = VNodeFlags.TextareaElement;
+            break;
+          case "select":
+            flags = VNodeFlags.SelectElement;
+            break;
+          default:
+            flags = VNodeFlags.HtmlElement;
         }
       }
 
