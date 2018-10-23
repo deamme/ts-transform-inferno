@@ -11,6 +11,7 @@ export const VNodeFlags = {
   Void: 512,
   Portal: 1024,
   ReCreate: 2048,
+  ContentEditable: 4096,
   FormElement: 448,
   Element: 481,
   Component: 14
@@ -22,5 +23,6 @@ export const ChildFlags = {
   HasVNodeChildren: 2,
   HasNonKeyedChildren: 4,
   HasKeyedChildren: 8,
+  HasTextChildren: 16,
   MultipleChildren: 12
 };
