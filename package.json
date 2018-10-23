@@ -29,11 +29,11 @@
     "typescript": ">=2.7.1"
   },
   "devDependencies": {
-    "typescript": "^2.7.1",
     "@types/node": "^8.0.53",
     "fs-extra": "^4.0.2",
     "glob": "^7.1.2",
     "rimraf": "^2.6.2",
-    "ts-node": "^3.3.0"
+    "ts-node": "^3.3.0",
+    "typescript": "^3.1.3"
   }
 }

@@ -1,4 +1,4 @@
-import { render, version, Component } from 'inferno'
+import { render, version, Component, Fragment } from 'inferno'
 import { Incrementer } from './components/Incrementer'
 
 const container = document.getElementById('app')
@@ -17,9 +17,9 @@ class MyComponent extends Component<any, any> {
       <div>
         <h1>{`Welcome to Inferno ${version} TSX ${this.tsxVersion}`}</h1>
         <Incrementer name={'Crazy button'} />
-        <>
-          <div>Fragment test</div>
-        </>
+        <Fragment>
+          <div />
+        </Fragment>
       </div>
     )
   }
