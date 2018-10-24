@@ -22,7 +22,7 @@
     "rollup-plugin-serve": "^0.4.2",
     "rollup-plugin-typescript2": "^0.16.1",
     "rollup-plugin-uglify": "^4.0.0",
-    "ts-transform-inferno": "^3.0.2",
+    "ts-transform-inferno": "^4.0.0",
     "typescript": "^3.1.3"
   }
 }
