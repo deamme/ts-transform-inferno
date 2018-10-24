@@ -2,9 +2,8 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
 import typescript from 'rollup-plugin-typescript2'
-const transformInferno = require('../../dist').default
-// import transformInferno from '../../dist/index'
-// import transformInferno from 'ts-transform-inferno'
+// const transformInferno = require('../../dist').default
+import transformInferno from 'ts-transform-inferno'
 console.log(transformInferno)
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'

@@ -3,8 +3,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const path = require('path')
-// const transformInferno = require("ts-transform-inferno").default;
-const transformInferno = require('../../dist').default
+const transformInferno = require('ts-transform-inferno').default
+// const transformInferno = require('../../dist').default
 const transformClasscat = require('ts-transform-classcat').default
 
 module.exports = {
