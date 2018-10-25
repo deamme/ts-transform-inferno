@@ -1,0 +1,1 @@
+<div><FooBar key="foo"/><div key="1">1</div></div>

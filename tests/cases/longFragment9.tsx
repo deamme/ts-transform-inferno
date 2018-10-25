@@ -1,0 +1,1 @@
+<Fragment key="foo" $HasKeyedChildren>{magic}</Fragment>

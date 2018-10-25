@@ -1,0 +1,1 @@
+<Inferno.Fragment key="foo" $HasNonKeyedChildren>{magic}</Inferno.Fragment>

@@ -3,9 +3,5 @@
  * Functional components provide great performance but does not have state
  */
 export function Visualizer({ number: number }) {
-  return (
-    <div className={{visualizer: true, test: true}}>
-      {number}
-    </div>
-  );
+  return <div className="test">{number}</div>
 }

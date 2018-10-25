@@ -1,0 +1,1 @@
+<div contentEditable={logic}></div>

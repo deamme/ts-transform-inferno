@@ -16,6 +16,9 @@ function createVarStatement(name: string) {
 export default (sourceFile: ts.SourceFile, context) => {
   let statements = [...sourceFile.statements];
 
+  if (context["createFragment"]) {
+    statements.unshift(createVarStatement("createFragment"));
+  }
   if (context["createVNode"]) {
     statements.unshift(createVarStatement("createVNode"));
   }
