@@ -62,7 +62,18 @@ export default () => {
           let text = handleWhiteSpace(node.getFullText())
 
           if (text !== '') {
-            return ts.createLiteral(text)
+            /**
+             * TypeScript internal module, src/compiler/transformers/jsx.ts,
+             * unescapes HTML entities such as &nbsp; in JSX text that is
+             * directly inside an element or a fragment.
+             */
+            return ts.createLiteral(
+              JSON.parse(
+                ts
+                  .transpile(`<>${text}</>`, { jsx: ts.JsxEmit.React })
+                  .replace(/^[\s\S]*?("[\s\S]*")[\s\S]*?$/, '$1')
+              )
+            )
           }
           break
 
