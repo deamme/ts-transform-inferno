@@ -1,3 +1,4 @@
 import * as Inferno from "inferno";
+var createTextVNode = Inferno.createTextVNode;
 var createFragment = Inferno.createFragment;
-createFragment([createFragment(["Text"], 16)], 2);
+createFragment([createFragment([createTextVNode("Text")], 4)], 4);
