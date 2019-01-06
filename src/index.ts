@@ -309,9 +309,16 @@ export default () => {
             vProps.hasTextChildren ||
             (childrenResults.foundText && childrenResults.hasSingleChild)
           ) {
-            childFlags = ChildFlags.HasTextChildren
+            childrenResults.foundText = vType.vNodeType === TYPE_FRAGMENT
+            childFlags =
+              vType.vNodeType === TYPE_FRAGMENT
+                ? ChildFlags.HasNonKeyedChildren
+                : ChildFlags.HasTextChildren
           } else if (childrenResults.hasSingleChild) {
-            childFlags = ChildFlags.HasVNodeChildren
+            childFlags =
+              vType.vNodeType === TYPE_FRAGMENT
+                ? ChildFlags.HasNonKeyedChildren
+                : ChildFlags.HasVNodeChildren
           }
         } else {
           if (vProps.hasKeyedChildren) {
@@ -336,6 +343,10 @@ export default () => {
         if (childIndex !== -1) {
           props.properties.splice(childIndex, 1) // Remove prop children
         }
+      }
+
+      if (vChildren && vChildren !== NULL && childrenResults.foundText) {
+        vChildren = transformTextNodes(vChildren)
       }
 
       let willNormalizeChildren =
@@ -395,6 +406,12 @@ export default () => {
         )
         context['createVNode'] = true
       } else if (vType.vNodeType === TYPE_FRAGMENT) {
+        if (
+          !childrenResults.requiresNormalization &&
+          childrenResults.hasSingleChild
+        ) {
+          vChildren = ts.createArrayLiteral([vChildren])
+        }
         createVNodeCall = ts.createCall(
           ts.createIdentifier('createFragment'),
           [],
@@ -611,10 +628,10 @@ export default () => {
           children.push(vNode)
 
           /*
-            * Loop direct children to check if they have key property set
-            * If they do, flag parent as hasKeyedChildren to increase runtime performance of Inferno
-            * When key already found within one of its children, they must all be keyed
-            */
+           * Loop direct children to check if they have key property set
+           * If they do, flag parent as hasKeyedChildren to increase runtime performance of Inferno
+           * When key already found within one of its children, they must all be keyed
+           */
           if (parentCanBeKeyed === false && child.openingElement) {
             let astProps = child.openingElement.attributes.properties
             let len = astProps.length
