@@ -29,7 +29,7 @@ function compile(path: string, callback) {
   callback(files)
 }
 
-let failedTests = 0
+let failedTests = []
 mkdirpSync(resolve(__dirname, 'temp/'))
 
 function compare(filePath: string, output: string) {
@@ -42,17 +42,21 @@ function compare(filePath: string, output: string) {
     const fileData = readFileSync(referenceFilePath, 'utf8')
     if (fileData !== output) {
       writeFileSync(tempFilePath, output, 'utf8')
-      failedTests++
+      failedTests.push(fileBasename)
     }
   } catch (error) {
     writeFileSync(tempFilePath, output, 'utf8')
-    failedTests++
+    failedTests.push(fileBasename)
   }
 }
 
 function printFinalResult(files: string[]) {
-  if (failedTests) {
-    console.log(`${files.length - failedTests}/${files.length} cases passed`)
+  if (failedTests.length) {
+    console.log(
+      `${files.length - failedTests.length}/${files.length} cases passed`
+    )
+    console.log('Following tests failed:')
+    failedTests.map(test => console.log(test))
     console.log('Please look in the test/temp folder and verify output')
     console.log('When verified use the command: npm run overwrite-references')
     throw 'Failed tests...'
