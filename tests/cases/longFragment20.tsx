@@ -1,0 +1,1 @@
+<Inferno.Fragment><span key="ok">kk</span><div key="ok2">ok</div></Inferno.Fragment>

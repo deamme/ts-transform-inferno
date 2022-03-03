@@ -1,0 +1,1 @@
+<React.Fragment>{dynamic}</React.Fragment>

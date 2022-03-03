@@ -1,0 +1,1 @@
+<img $ChildFlag={1}>foobar</img>

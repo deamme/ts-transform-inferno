@@ -1,0 +1,1 @@
+<Inferno.Fragment>Test</Inferno.Fragment>

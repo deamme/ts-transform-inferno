@@ -1,0 +1,1 @@
+<img $ChildFlag={bool ? 1 : 2}>{expression}</img>

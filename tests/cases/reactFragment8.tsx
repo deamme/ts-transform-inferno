@@ -1,0 +1,1 @@
+<React.Fragment key="foo" $HasNonKeyedChildren>{magic}</React.Fragment>

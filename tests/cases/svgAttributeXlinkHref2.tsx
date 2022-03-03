@@ -1,0 +1,1 @@
+<svg><use xlinkHref="#tester"></use></svg>

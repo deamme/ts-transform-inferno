@@ -1,0 +1,1 @@
+<media>foobar</media>

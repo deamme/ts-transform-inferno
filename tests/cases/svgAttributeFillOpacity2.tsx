@@ -1,0 +1,1 @@
+<svg><rect fillOpacity="1"></rect></svg>

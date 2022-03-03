@@ -1,0 +1,1 @@
+<div><FooBar/>foobar</div>
