@@ -1,0 +1,1 @@
+<div $HasTextChildren>{foobar}</div>

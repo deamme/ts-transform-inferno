@@ -1,0 +1,1 @@
+<Inferno.Fragment>{dynamic}</Inferno.Fragment>
